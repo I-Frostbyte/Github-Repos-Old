@@ -1,0 +1,22 @@
+{
+  "name": "bootstrap-tutorial-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/I-Frostbyte/bootstrap-tutorial-website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/I-Frostbyte/bootstrap-tutorial-website/issues"
+  },
+  "homepage": "https://github.com/I-Frostbyte/bootstrap-tutorial-website#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.1"
+  }
+}
