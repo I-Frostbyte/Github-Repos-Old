@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Quicksand', sans-serif;
+}
+
+#everything-container {
+    width: 100%;
+}
+
+#navbar {
+    width: 100%;
+    text-align: end;
+    padding: 40px 0;
+    background-color: beige;
+    position: fixed;
+    margin-top: -10px;
+}
+
+#navbar a {
+    text-decoration: none;
+    font-size: larger;
+    font-weight: bolder;
+    margin: 50px;
+}
+
+#welcome-section {
+    text-align: center;
+    padding: 200px 0 0 0;
+    color: white;
+    background-color: #033;
+    height: 100vh;
+
+}
+
+#welcome-section p {
+    font-style: italic;
+}
+
+#projects {
+    text-align: center;
+    background-color: lightslategrey;
+    max-width: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 40px;
+    padding-bottom: 5rem;
+}
+
+#project-header h1 {
+    text-align: center;
+    padding-top: 75px;
+    padding-bottom: 40px;
+    text-decoration: underline;
+    background-color: lightslategrey;
+    margin: -1px 0;
+}
+
+.project-tile  img {
+    max-width: 100%;
+}
+
+.project-tile {
+    width: 100%;
+    margin: 10px 0;
+    padding: 40px 0;
+}
+
+.project-tile h2 {
+    background-color: dimgrey;
+    margin-top: -4px;
+    padding: 20px 0;
+}
+
+#contact {
+    text-align: center;
+    padding: 10px 0 200px 0;
+}
+
+#contact h2 {
+    font-weight: bolder;
+}
+
+#contact p {
+    font-style: italic;
+}
+
+#icons {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+#icons-items a {
+    text-decoration: none;
+    padding: 0 10px;
+    margin: 0 10px;
+    color: black;
+}
+
+@media screen and (max-width: 780px) {
+    #welcome-section {
+        width: 100%;
+    }
+
+    #projects {
+        max-width: 100%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 5px;
+        padding-bottom: 5rem;
+    }
+}
