@@ -1,0 +1,48 @@
+
+.left-sidebar {
+    max-width: 15%;
+    height: 135vh;
+    position: sticky;
+    background-color: navy;
+    align-items: center;
+    margin-top: -50px;
+    padding-left: 20px;
+    color: white;
+    /* margin: left auto; */
+}
+
+p, h3 {
+    padding-bottom: 0.5px;
+    padding-left: 20px;
+}
+
+hr {
+    max-width: 200%;
+    margin-right: 30px;
+}
+
+
+.left-sidebar-header {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin: 5px;
+    padding-bottom: 50px;
+    padding-top: 75px;
+}
+
+.left-sidebar-items {
+    display: flex;
+    align-items: center;
+    border-radius: 3.5%;
+    justify-content: left;
+    margin-right: 10px;
+    
+}
+
+.left-sidebar-items:hover {
+    background-color: lightblue;
+}
+
+

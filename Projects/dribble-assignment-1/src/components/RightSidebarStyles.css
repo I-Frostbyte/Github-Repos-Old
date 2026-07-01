@@ -1,0 +1,89 @@
+.right-sidebar {
+    max-width: 20%;
+    height: 100%;
+    position: sticky;
+    right: 1%;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+}
+
+.profile-img {
+    width: 25%;
+    border-radius: 75%;
+}
+
+.sections {
+    display: flex;
+    align-items: center;
+    width: 25%;
+    padding: 5px;
+}
+
+.sections > h3 {
+    border: 1rem light bisque;
+    padding: 5px 15px 5px 15px;
+    background-color: beige;
+    border-radius: 2.5%;
+}
+
+h3:hover {
+    background-color: lightcyan;
+}
+
+.top-live {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 10px 0 -10px;
+}
+
+.top-live > h3 {
+    font-weight: bold;
+}
+
+.top-live > select {
+    background-color: lightcyan;
+    border-radius: 7.5%;
+    padding: 1px 7.5px 1px 7.5px;
+    border: none;
+}
+
+.projects {
+    display: flex;
+    align-items: center;
+}
+
+.projects-img {
+    width: 50%;
+    border-radius: 5%;
+    margin: 5px;
+}
+
+.title-et-author {
+    width: 50%;
+    padding: -10px 2px -10px 2px;
+    margin: 0.5px;
+    display: block;
+    justify-content: center;
+    /* background-color: blue; */
+    object-fit: contain;
+}
+
+.title-et-author > h5 {
+    margin: -2px;
+    padding-left: 15px;
+}
+
+.title-et-author > p {
+    margin: -2px;
+    padding-top: 5px;
+}
+
+p {
+    font-size: small;
+}
