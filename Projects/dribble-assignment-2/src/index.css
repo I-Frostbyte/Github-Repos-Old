@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'Quicksand', sans-serif;
+}
+
+#left-sidebar {
+  height: 135vh;
+  color:  white;
+}
+
+#all-link {
+  color: black;
+  font-weight: bold;
+  border: 1.5px solid black;
+}
+
+#overview-link {
+  color: white;
+}
+
+#profile-img {
+  width: 15%;
+  height: 100%;
+}
+
+#top-live {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 10px 0 -10px;
+  padding: 20px 0;
+}
+
+#top-live > h3 {
+  font-weight: bold;
+  font-size: medium;
+  padding-left: 10px;
+}
+
+#top-live > select {
+  background-color: lightcyan;
+  border-radius: 7.5%;
+  padding: 0 10px 0 10px;
+  border: none;
+}
+
+#projects-img {
+  width: 100%;
+  border-radius: 5%;
+}
+
+#hero-header {
+  justify-content: space-between;
+}
+
+#card-text {
+  justify-content: space-between;
+}
+
+#card-1 {
+  background-color: #823781;
+  color: white;
+}
+
+#card-2 {
+  background-color: orangered;
+  color: white;
+}
+
+#card-3 {
+  background-color: limegreen;
+  color: white;
+}
+
+#card-4 {
+  background-color: #adc0ff;
+  color: white;
+}
+
+#card-5 {
+  background-color: #ffc2f0;
+  color: white;
+}
+
+#card-6 {
+  background-color: #ff9f5f;
+  color: white;
+}
+
+#icon-below-1 {
+  font-size: 25px;
+  padding-top: 5px;
+}
+
+#card-text-tile > h6 {
+  margin-top: -15px;
+}
+
+
+/* body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} */
