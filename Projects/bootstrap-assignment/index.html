@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap Assignment</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"> -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-lg border-bottom border-2 ps-5 bg-white">
+      <div class="container-fluid pb-2">
+        <a class="navbar-brand fs-5 fw-semibold" href="#"
+          >Explore the Showcase</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >Popular</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Recent</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Cloneable</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <nav class="nav pt-3 ps-5">
+      <a class="nav-link text-muted" aria-current="page" href="#">Recent</a>
+      <a class="nav-link active text-muted fw-bold" href="#">Most Liked</a>
+      <a class="nav-link text-muted" href="#">Most Viewed</a>
+    </nav>
+    <div class="container text-center pt-3">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="card my-3" style="width: 16rem">
+            <img src="./assets/template1.jpg" class="card-img-top" alt="..." />
+            <div class="card-body d-flex small text-muted py-2 justify-content-around">
+              <i class="bi bi-eye-fill px-1"> 22204</i>
+              <i class="bi bi-chat-left-fill px-1"> 28</i>
+              <!-- <i class="bi bi-window-stack px-1"> 2808</i> -->
+              <i class="bi bi-heart-fill px-1"> 562</i>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-1">
+            <img src="./assets/Portrait1.jpg" alt="" style="width: 40px ; height: 6vh" class="rounded-circle" />
+            <div class="d-block">
+                <p class="small px-1 my-0 py-0">Living Room</p>
+                <p class="small px-1 my-0 py-0 fw-bold">by Amelia</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="card my-3" style="width: 16rem">
+            <img src="./assets/template2.jpg" class="card-img-top" alt="..." />
+            <div class="card-body d-flex small text-muted py-2 justify-content-around">
+              <i class="bi bi-eye-fill px-1"> 27628</i>
+              <i class="bi bi-chat-left-fill px-1"> 37</i>
+              <!-- <i class="bi bi-window-stack px-1"> 2808</i> -->
+              <i class="bi bi-heart-fill px-1"> 540</i>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-1">
+            <img src="./assets/Portrait4.jpg" alt="" style="width: 40px ; height: 6vh" class="rounded-circle" />
+            <div class="d-block">
+                <p class="small px-1 my-0 py-0">Hiker's Dream</p>
+                <p class="small px-1 my-0 py-0 fw-bold">by Seidou</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="card my-3" style="width: 16rem">
+            <img src="./assets/template3.jpg" class="card-img-top" alt="..." />
+            <div class="card-body d-flex small text-muted py-2 justify-content-around">
+              <i class="bi bi-eye-fill px-1"> 19195</i>
+              <i class="bi bi-chat-left-fill px-1"> 31</i>
+              <i class="bi bi-window-stack px-1"> 2808</i>
+              <i class="bi bi-heart-fill px-1"> 538</i>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-1">
+            <img src="./assets/Portrait3.jpg" alt="" style="width: 40px ; height: 6vh" class="rounded-circle" />
+            <div class="d-block">
+                <p class="small px-1 my-0 py-0">Shopping</p>
+                <p class="small px-1 my-0 py-0 fw-bold">by Lewis</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="card my-3" style="width: 16rem">
+            <img src="./assets/template4.jpg" class="card-img-top" alt="..." />
+            <div class="card-body d-flex small text-muted py-2 justify-content-around">
+              <i class="bi bi-eye-fill px-1"> 21024</i>
+              <i class="bi bi-chat-left-fill px-1"> 46</i>
+              <!-- <i class="bi bi-window-stack px-1"> 2808</i> -->
+              <i class="bi bi-heart-fill px-1"> 526</i>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-1">
+            <img src="./assets/Portrait1.jpg" alt="" style="width: 40px ; height: 6vh" class="rounded-circle" />
+            <div class="d-block">
+                <p class="small px-1 my-0 py-0">Golden Hour</p>
+                <p class="small px-1 my-0 py-0 fw-bold">by Amelia</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="card my-3" style="width: 16rem">
+            <img src="./assets/template5.jpg" class="card-img-top" alt="..." />
+            <div class="card-body d-flex small text-muted py-2 justify-content-around">
+              <i class="bi bi-eye-fill px-1"> 12717</i>
+              <i class="bi bi-chat-left-fill px-1"> 65</i>
+              <i class="bi bi-window-stack px-1"> 2508</i>
+              <i class="bi bi-heart-fill px-1"> 526</i>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-1">
+            <img src="./assets/Portrait4.jpg" alt="" style="width: 40px ; height: 6vh" class="rounded-circle" />
+            <div class="d-block">
+                <p class="small px-1 my-0 py-0">Evergreen</p>
+                <p class="small px-1 my-0 py-0 fw-bold">by Seidou</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="card my-3" style="width: 16rem">
+            <img src="./assets/template6.jpg" class="card-img-top" alt="..." />
+            <div class="card-body d-flex small text-muted py-2 justify-content-around">
+              <i class="bi bi-eye-fill px-1"> 17560</i>
+              <i class="bi bi-chat-left-fill px-1"> 39</i>
+              <!-- <i class="bi bi-window-stack px-1"> 2808</i> -->
+              <i class="bi bi-heart-fill px-1"> 488</i>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-1">
+            <img src="./assets/Portrait2.jpg" alt="" style="width: 40px ; height: 6vh" class="rounded-circle" />
+            <div class="d-block">
+                <p class="small px-1 my-0 py-0">Podcast Heaven</p>
+                <p class="small px-1 my-0 py-0 fw-bold">by Lillian</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="card my-3" style="width: 16rem">
+            <img src="./assets/template7.jpg" class="card-img-top" alt="..." />
+            <div class="card-body d-flex small text-muted py-2 justify-content-around">
+              <i class="bi bi-eye-fill px-1"> 15595</i>
+              <i class="bi bi-chat-left-fill px-1"> 41</i>
+              <i class="bi bi-window-stack px-1"> 3901</i>
+              <i class="bi bi-heart-fill px-1"> 472</i>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-1">
+            <img src="./assets/Portrait3.jpg" alt="" style="width: 40px ; height: 6vh" class="rounded-circle" />
+            <div class="d-block">
+                <p class="small px-1 my-0 py-0">Chef's Delight</p>
+                <p class="small px-1 my-0 py-0 fw-bold">by Lewis</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="card my-3" style="width: 16rem">
+            <img src="./assets/template8.jpg" class="card-img-top" alt="..." />
+            <div class="card-body d-flex small text-muted py-2 justify-content-around">
+              <i class="bi bi-eye-fill px-1"> 20589</i>
+              <i class="bi bi-chat-left-fill px-1"> 29</i>
+              <!-- <i class="bi bi-window-stack px-1"> 2808</i> -->
+              <i class="bi bi-heart-fill px-1"> 454</i>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-1">
+            <img src="./assets/Portrait2.jpg" alt="" style="width: 40px ; height: 6vh" class="rounded-circle" />
+            <div class="d-block">
+                <p class="small px-1 my-0 py-0">Home Grown</p>
+                <p class="small px-1 my-0 py-0 fw-bold">by Lillian</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
