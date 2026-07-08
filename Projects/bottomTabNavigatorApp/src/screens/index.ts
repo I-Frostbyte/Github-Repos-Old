@@ -1,0 +1,10 @@
+export {default as Splash} from './auth/splash.screen'
+export {default as Login} from "./auth/login.screen"
+export {default as Profile} from "./profile/profile.screen"
+export {default as Settings} from "./settings/settings.screen"
+export {default as Home} from "./main/home.screen"
+export {default as Product} from "./main/product.screen"
+export {default as Purchase} from "./main/purchase.screen"
+export {default as Register} from "./auth/register.screen"
+export {default as Verification} from "./auth/verification.screen"
+export {default as Transfer} from "./main/transfer.screen"
