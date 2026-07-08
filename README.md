@@ -1,18 +1,13 @@
-# 🚀 Project Title
+# 🚀 Github-Repos-Old
 
-A brief, punchy one-sentence summary of what this project does and who it is for.
+This project exists to hold old repositories I am no longer working on.
 
 ---
 
 ## 📋 Table of Contents
 - [About the Project](#-about-the-project)
-- [Features](#-features)
-- [Built With](#-built-with)
-- [Getting Started](#-getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#-usage)
-- [Roadmap](#-roadmap)
+- [Folders](#-folders)
+- [Languages Used](#-languages-used)
 - [Contributing](#-contributing)
 - [License](#-license)
 - [Contact](#-contact)
@@ -22,74 +17,25 @@ A brief, punchy one-sentence summary of what this project does and who it is for
 
 ## ℹ️ About the Project
 
-Provide a more detailed description of your project here. Explain the core problem it solves, why you built it, and the main value it provides. If applicable, you can also paste a screenshot or an animated GIF showing the project in action right below.
+This folder is divided into four different categories: Codewars, Portfolio, Projects & Tutorials.
+Each folder is an umbrella for the various repos that match the description.
 
-### ✨ Features
-- **Core Feature A**: Brief description of how it works or what it achieves.
-- **Core Feature B**: Highlight another unique selling point or technical capability.
-- **Core Feature C**: Mention something about user experience, performance, or UI.
+### ✨ Folders
+- **Codewars**: Holds all the codewars repos.
+- **Portfolio**: Holds the different portfolio repos I have created.
+- **Projects**: Holds any and all projects I have worked on, either personal or teamwork.
+- **Tutorials**: Holds every tutorial session or class I have taken in pursuit of dev.
 
-### 🛠️ Built With
+### 🛠️ Languages Used
 List the major frameworks, libraries, and languages used to bootstrap your project.
-- [Next.js](https://nextjs.org)
-- [React.js](https://reactjs.org)
-- [Tailwind CSS](https://tailwindcss.com)
+- [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [TypeScript](https://typescriptlang.org)
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- [C](https://www.c-language.org/)
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [Go](https://go.dev/)
 
 ---
-
-## 🚀 Getting Started
-
-Follow these steps to set up the project locally on your machine.
-
-### Prerequisites
-List the software or tools required before installing your project (e.g., package managers).
-```bash
-npm install npm@latest -g
-```
-
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd your-repo-name
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Set up your environment variables by creating a `.env` file based on `.env.example`:
-   ```bash
-   cp .env.example .env
-   ```
-5. Start the local development server:
-   ```bash
-   npm run dev
-   ```
-
----
-
-## 💡 Usage
-
-Show how your project can be used. Provide clear code snippets, command line commands, or step-by-step user workflows to guide a new developer.
-
-```javascript
-// Quick example of how to initialize or call a core function
-const myApp = require('your-repo-name');
-myApp.init({ debug: true });
-```
-
----
-
-## 🗺️ Roadmap
-
-- [x] Initial release and basic setup
-- [ ] Add user authentication system
-- [ ] Implement multi-language support (i18n)
-- [ ] Optimize database query performance
 
 ---
 
@@ -113,8 +59,8 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 
 ## 📬 Contact
 
-- **Your Name**: [your.email@example.com](mailto:your.email@example.com)
-- **Project Link**: [https://github.com](https://github.com)
+- **Gilbert Tima**: [gilbert.tanuie.tima@gmail.com](mailto:gilbert.tanuie.tima@gmail.com)
+- **Project Link**: [https://github.com/I-Frostbyte/Github-Repos-Old](https://github.com/I-Frostbyte/Github-Repos-Old)
 
 ---
 
