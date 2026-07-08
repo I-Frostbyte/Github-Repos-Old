@@ -1,0 +1,9 @@
+{
+  "event_type": "$event_type",
+  "client_payload": {
+    "service": "$service",
+    "version": "$version",
+    "unit": false,
+    "integration": true
+  }
+}

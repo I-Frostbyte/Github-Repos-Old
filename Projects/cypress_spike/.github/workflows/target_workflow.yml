@@ -1,0 +1,64 @@
+name: Trigger Target Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_service:
+        description: cypress_spike_tests
+        required: true
+        default: cypress_spike_tests
+      target_version:
+        description: v1.0.0
+        required: true
+        default: v1.0.0
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Workflow in Another Repository
+        run: |
+          # Set the required variables
+          repo_owner="I-Frostbyte" 
+          repo_name="cypress_spike_tests"  
+          event_type="trigger-workflow" 
+          service="${{ github.event.inputs.target_service }}"
+          version="${{ github.event.inputs.target_version }}"
+  
+          curl -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.PAT }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/$repo_owner/$repo_name/dispatches \
+            -d "{\"event_type\": \"$event_type\", \"client_payload\": {\"service\": \"$service\", \"version\": \"$version\", \"unit\": false, \"integration\": true}}"
+
+      - name: Wait for Target Workflow
+        id: wait_for_target
+        env: 
+            TARGET_WORKFLOW_ID: ${{ steps.trigger_target.outputs.target_workflow_id}}
+        run: |
+          # Wait for the target workflow to complete
+          repo_owner="I-Frostbyte" 
+          repo_name="cypress_spike_tests"
+          while true; do
+            status=$(curl -H "Accept: application/vnd.github+json" \
+                       -H "Authorization: ${{ secrets.GITHUB_TOKEN }}" \
+                       -H "X-GitHub-Api-Version: 2022-11-28" \
+                        https://api.github.com/repos/$repo_owner/$repo_owner/actions/workflows/$TARGET_WORKFLOW_ID/runs | jq -r '.workflow_runs[0].conclusion')
+            if [ "$status" == "success" ]; then
+              echo "Target workflow completed successfully"
+              break
+            elif [ "$status" == "failure" ]; then
+              echo "Target workflow failed"
+              exit 1
+            fi
+            sleep 10
+          done
+
+      - name: Conclued Original Workflow
+        run: |
+          echo "Original workflow completed"
