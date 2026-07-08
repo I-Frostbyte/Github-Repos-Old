@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>Websockets with Frostbyte</title>
+    </head>
+
+    <body>
+        <div class="center">
+            <h1>Amazing Chat Application</h1>
+            <h3 id="chat-header">Currently in chat: general</h3>
+            <h3 id="connection-header">Connected to Websocket: false</h3>
+            <h3 id="mqtt-connection-header">Connected to MQTT Websocket: false</h3>
+
+            <form id="chatroom-selection">
+                <label for="chatroom">Chatroom:</label>
+                <input type="text" id="chatroom" name="chatroom"/><br><br>
+                <input type="submit" value="Change chatroom" />
+            </form>
+
+            <br>
+
+            <textarea class="messagearea" id="chatmessages" readonly name="chatmessages" rows="4" cols="50" placeholder="Welcome to chatroom"></textarea>
+
+            <br>
+
+            <form id="chatroom-message">
+                <label for="message">Message:</label>
+                <input type="text" id="message" name="chatroom"><br><br>
+                <input type="submit" value="Send message" />
+            </form>
+
+            <div style="border: 3px solid black;margin-top:30px;">
+                <form id="login-form">
+                    <label for="username">username:</label>
+                    <input type="text" id="username" name="username"><br>
+                    <label for="password">password:</label>
+                    <input type="password" id="password" name="password"><br><br>
+                    <input type="submit" value="login">
+                </form>
+            </div>
+        </div>
+
+        <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+        <script>
+            var selectedChat = "general";
+
+            class Event {
+                constructor(type, payload){
+                    this.type = type;
+                    this.payload = payload;
+                }
+            }
+
+            function routeEvent(event) {
+                if (event.type === undefined) {
+                    alert('no type field in the event');
+                }
+
+                switch(event.type) {
+                    case "new_message":
+                        console.log("new message");
+                        break;
+                    default:
+                        alert("unsupported message type");
+                        break;
+                }
+            }
+
+            function sendEvent(eventName, payload) {
+                const event = new Event(eventName, payload);
+
+                conn.send(JSON.stringify(event));
+            }
+
+            function changeChatRoom(){
+                var newchat = document.getElementById("chatroom");
+                if(newchat != null && newchat.Value != selectedChat){
+                    console.log(newchat);
+                }
+                return false;
+            }
+
+            function sendMessage() {
+                var newMessage = document.getElementById("message");
+                if(newMessage != null){
+                    sendEvent("send_message", newMessage.value)
+                }
+                return false;
+            }
+
+            let conn = null; // connection for the original websocket
+            let mqttConn = null; // connection to mqtt and mosquitto
+
+            function login(){
+                let formData = {
+                    "username": document.getElementById("username").value,
+                    "password": document.getElementById("password").value
+                }
+
+                fetch("login", {
+                    method: "post",
+                    body: JSON.stringify(formData),
+                    mode: "cors"
+                }).then((response) => {
+                    if(response.ok){
+                        return response.json();
+                    } else {
+                        throw 'unauthorized';
+                    }
+                }).then((data) => {
+                    // we are authenticated by now
+                    connectWebsocket(data.otp);
+                    connectMQTTWebsocket();
+                }).catch((err) => { alert(err)});
+
+                return false;
+            }
+
+            function connectWebsocket(otp){
+                if(window["WebSocket"]) {
+                    console.log("Connecting to backend Websocket...");
+                    // connect to ws
+                    conn = new WebSocket("ws://" + document.location.host + "/ws?otp="+otp);
+
+                    console.log(conn)
+
+                    // updating the header whenever we connect.
+                    // onopen will trigger whenever the websocket is connected.
+                    conn.onopen = function (evt) {
+                        document.getElementById("connection-header").innerHTML = "Connected to Websocket: true";
+                    }
+
+                    // onclose will trigger whenever the websocket is closed.
+                    conn.onclose = function(evt) {
+                        document.getElementById("connection-header").innerHTML = "Connected to Websocket: false";
+                        // reconnection: automatic in the scenario of anything but a manual close
+                    }
+
+                    conn.onmessage = function(evt) {
+                        const eventData = JSON.parse(evt.data);
+
+                        const event = Object.assign(new Event, eventData);
+
+                        routeEvent(event);
+                    }
+                } else {
+                    alert('Browser does not support websockets')
+                }
+            }
+
+            function connectMQTTWebsocket() {
+                if (window["WebSocket"]) {
+                    console.log("Connecting to MQTT Websocket...")
+
+                    mqttConn = new WebSocket("ws://localhost:9001")
+
+                    console.log(mqttConn)
+
+                    mqttConn.onopen = function () {
+                        document.getElementById("mqtt-connection-header").innerHTML = "Connected to MQTT Websocket: true";
+                        // Send any initial subscribe messages here, if needed
+                    };
+
+                    mqttConn.onclose = function () {
+                        document.getElementById("mqtt-connection-header").innerHTML = "Connected to MQTT Websocket: false"
+                    };
+
+                    // Connect to your Mosquitto WebSocket broker
+                    const client = mqtt.connect("ws://localhost:9001", {
+                        clientId: "web_client_" + Math.random().toString(16).substr(2, 8),
+                        clean: true, // ensures a fresh session each time
+                    });
+
+                    // Subscribe to the topic when connected
+                    client.on("connect", function () {
+                        console.log("Connected to MQTT broker via WebSocket");
+
+                        // Subscribe to topic
+                        client.subscribe("WebsocketsPOC", function (err) {
+                            if (!err) {
+                                console.log("Subscribed to WebsocketsPOC");
+
+                                // Publish each line of "This Old Man"
+                                const lines = [
+                                    "This old man, he played one",
+                                    "He played knick-knack on my thumb",
+                                    "With a knick-knack paddywhack, give a dog a bone",
+                                    "This old man came rolling home",
+                                    "This old man, he played two...",
+                                    "He played knick-knack on my shoe...",
+                                    // ...add more as desired
+                                ];
+
+                                let i = 0;
+                                const interval = setInterval(() => {
+                                    if (i < lines.length) {
+                                        client.publish("WebsocketsPOC", lines[i]);
+                                        i++;
+                                    } else {
+                                        clearInterval(interval);
+                                    }
+                                }, 1500);
+                            }
+                        });
+                    });
+
+                    // Receive messages
+                    client.on("message", function (topic, message) {
+                        console.log(`MQTT Message from ${topic}:`, message.toString());
+                    });
+
+
+                    mqttConn.onmessage = function(evt) {
+                        console.log("MQTT Message: ", evt.data)
+                    }
+                }
+            }
+
+            window.onload = function(){
+                document.getElementById("chatroom-selection").onsubmit = changeChatRoom;
+                document.getElementById("chatroom-message").onsubmit = sendMessage;
+                document.getElementById("login-form").onsubmit = login;
+
+            }
+        </script>
+
+        <style type="text/css">
+            body {
+                overflow: hidden;
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                background: rgb(66, 56, 56);
+            }
+
+            .center {
+                margin: auto;
+                width: 50%;
+                border: 3px solid green;
+                padding: 10px;
+            }
+        </style>
+    </body>
+</html>

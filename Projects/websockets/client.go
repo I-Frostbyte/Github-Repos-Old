@@ -1,0 +1,149 @@
+package main
+
+import (
+	"encoding/json"
+	"log"
+	"time"
+
+	"github.com/gorilla/websocket"
+)
+
+var (
+	// pongWait is the duration for how long we will await a pong from a client before dropping the connection.
+	pongWait = 10 * time.Second
+
+	// pingInterval is how often we will send pings to the client. It needs to always be smaller than the pongWait.
+	pingInterval = (pongWait * 9) / 10
+)
+
+type ClientList map[*Client]bool
+
+type Client struct {
+	connection *websocket.Conn
+	manager    *Manager
+	mosquitto *Mqtt
+
+	// egress is used to avoid concurrent writes on the websocket connection
+	egress chan Event
+}
+
+func NewClient(conn *websocket.Conn, manager *Manager) *Client {
+	return &Client{
+		connection: conn,
+		manager:    manager,
+		egress:     make(chan Event),
+	}
+}
+
+func (c *Client) readMessages() {
+	defer func() {
+		// cleanup connection
+		c.manager.removeClient(c)
+	}()
+
+	// SetReadDeadline from the gorilla package allows us to set a time for how long we should wait
+	if err := c.connection.SetReadDeadline(time.Now().Add(pongWait)); err != nil {
+		log.Println(err)
+		return
+	}
+
+	// Setting a limit for reading a message from the backend.
+	// SetReadLimit sets the maximum size in bytes for how large the message can be.
+	// This is tricky because it involves calculating the bytes of each message and making sure,
+	// that they have exceeded the read limit.
+	// Here we use a hard limit but it could be more dynamic.
+	c.connection.SetReadLimit(512)
+
+	// SetPongHandler applies a certain handler when a pong is triggered.
+	c.connection.SetPongHandler(c.pongHandler)
+
+	for {
+		_, payload, err := c.connection.ReadMessage()
+
+		if err != nil {
+			// CloseGoingAway and CloseAbnormalClosure are checks to ensure the err is not triggered by client or server.
+			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
+				log.Printf("error reading message: %v", err)
+			}
+			break
+		}
+
+		var request Event
+
+		if err := json.Unmarshal(payload, &request); err != nil {
+			log.Printf("error marshalling event :%v", err)
+			break
+		}
+
+		if err := c.manager.routeEvent(request, c); err != nil {
+			log.Println("error handling message: ", err)
+		}
+	}
+}
+
+// Websocket has a few events
+// ClosedEvent
+// ErrorEvent
+// MessageEvent
+// OpenEvent
+
+func (c *Client) writeMessages() {
+	defer func() {
+		c.manager.removeClient(c)
+	}()
+
+	ticker := time.NewTicker(pingInterval)
+
+	topic := "WebsocketsPOC"
+	qos := 1
+
+	for {
+		select {
+		case message, ok := <-c.egress:
+			if !ok {
+
+				err := c.connection.WriteMessage(websocket.CloseMessage, nil)
+				if err != nil {
+					log.Println("connection closed: ", err)
+				}
+
+				if token := c.mosquitto.client.Subscribe(topic, byte(qos), messagePubHandler); token.Wait() && token.Error() != nil {
+					log.Println("connection closed due to mosquitto: ", err)
+				}
+				return
+			}
+
+			data, err := json.Marshal(message)
+			if err != nil {
+				log.Println(err)
+				return
+			}
+
+			if err := c.connection.WriteMessage(websocket.TextMessage, data); err != nil {
+				log.Printf("failed to send message: %v", err)
+			}
+			log.Println("message sent")
+
+			if token := c.mosquitto.client.Publish(topic, 0, false, message)
+			token != nil {
+				log.Printf("failed to write to mosquitto channel: %v", err)
+			}
+			log.Println("message sent to mosquitto channel")
+		// This case is for when we receive a tick from the ticker.
+		case <-ticker.C:
+			log.Println("ping")
+
+			// Send a Ping to the Client
+			if err := c.connection.WriteMessage(websocket.PingMessage, []byte(``)); err != nil {
+				log.Println("writemsg err: ", err)
+				return
+			}
+		}
+	}
+}
+
+func (c *Client) pongHandler(pongMsg string) error {
+	log.Println("pong")
+	// We have to reset the timeline so as to enable subsequent pings and pongs
+	return c.connection.SetReadDeadline(time.Now().Add(pongWait))
+}
