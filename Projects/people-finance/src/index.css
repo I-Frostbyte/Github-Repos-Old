@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@0;1&family=Poppins:wght@300;400;500;600;800&family=Quicksand:wght@300;400;500;600;700&family=Style+Script&family=VT323&display=swap');
+
+* {
+  font-family: 'Quicksand';  
+}
+
+body {
+  background: linear-gradient(45deg, #023020 0 85%, #296E01);
+}
+
+/* .home {
+  background: linear-gradient(45deg, #023020 0 85%, #296E01);  
+} */
+
+/* #50C878 - light green */
+/* #d4af37 - metallic gold*/
+
+/* #items-list-container{
+  background: linear-gradient(to left top, #023020 0 75%, #296E01);  
+} */
+
+#list-items{
+  background: linear-gradient(to left top, #023020 0 75%, #296E01);  
+}
+
+#second-grid{
+  background: linear-gradient(325deg, #023020 0 75%, #133201);
+  /* border: none;
+  outline: none; */
+}
+
+.hideMenuNav {
+  display: none
+}
+
+.showMenuNav {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  /* background: black; */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  color: #d4af37;
+  backdrop-filter: blur(50px);  
+}
+
+/*
+"homepage": "https://I-Frostbyte.github.io/",
+
+"predeploy": "npm run build",
+"deploy": "gh-pages -b master -d build",
+*/
